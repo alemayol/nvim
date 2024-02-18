@@ -9,7 +9,7 @@ vim.opt.nu = true
 vim.opt.relativenumber = true
 
 -- No line wrap
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- Disable swap file and backup, Allow long running undos to undotree
 vim.opt.swapfile = false
@@ -30,5 +30,6 @@ vim.opt.scrolloff = 8
 -- Fast update time
 vim.opt.updatetime = 50
 
--- Colorcolumnmn... GREAT! (i have no idea what it does)
-vim.opt.colorcolumn = "80"
+-- Colorcolumnmn... GREAT! (i have no idea what it does... appearantly it puts the vertical bar)
+--vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = ""

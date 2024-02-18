@@ -24,7 +24,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Greatest remap ever (at least thats what harpoon man thinks)
 vim.keymap.set("x", "<leader>p", '"_dP')
 
--- Replace the word that u r on with new input
+-- Next greatest remap ever asbjornHaland
+vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>Y", "\"+Y")
+-- Replace the word that you are on with new input
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Give current file execute permission
