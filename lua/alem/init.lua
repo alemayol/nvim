@@ -1,4 +1,3 @@
-print("Hello There")
 require("alem.remap")
 require("alem.set")
 
