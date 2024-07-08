@@ -9,6 +9,12 @@ return {
             "github:nvim-java/mason-registry",
             "github:mason-org/mason-registry",
           },
+          ensure_installed = {
+            "clang-format",
+            "codelldb",
+            "stylua",
+            "prettierd",
+          },
         },
       })
     end,
@@ -19,7 +25,7 @@ return {
     lazy = false,
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "unocss", "gopls", "jdtls" },
+        ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "unocss", "gopls", "jdtls", "clangd" },
         --automatic_installation = true,
       })
     end,
@@ -42,6 +48,9 @@ return {
       lspconfig.unocss.setup({
         capabilities = capabilities,
       })
+      lspconfig.tailwindcss.setup({
+        capabilities = capabilities,
+      })
       lspconfig.gopls.setup({
         capabilities = capabilities,
         cmd = { "gopls" },
@@ -58,7 +67,13 @@ return {
         },
       })
       lspconfig.jdtls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
+      })
+      lspconfig.clangd.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.rust_analyzer.setup({
+        capabilities = capabilities,
       })
       -- Keybinds
       vim.keymap.set("n", "K", function()
