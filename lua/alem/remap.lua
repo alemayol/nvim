@@ -1,10 +1,11 @@
-vim.g.mapleader = " "
+vim.g.mapleader = " " -- leader key
 
-vim.keymap.set("n", "<leader>ep", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>cl", vim.cmd.close)
-vim.keymap.set("n", "<leader>lz", vim.cmd.Lazy)
-vim.keymap.set("n", "<S-w>", vim.cmd.w)
-vim.keymap.set("n", "<leader>wq", vim.cmd.wq)
+vim.keymap.set("n", "<leader>ep", vim.cmd.Ex) -- go to file explorer
+vim.keymap.set("n", "<leader>cl", vim.cmd.close) -- close window
+vim.keymap.set("n", "<leader>lz", vim.cmd.Lazy) -- launch lazy
+vim.keymap.set("n", "<S-w>", vim.cmd.w) -- save file
+vim.keymap.set("n", "<leader>wq", vim.cmd.wq) -- save file and quit
+vim.keymap.set("n", "<leader>ud", vim.cmd.u) -- undo last change
 
 -- Move highlighted text and auto indent
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -21,15 +22,18 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- Greatest remap ever (at least thats what harpoon man thinks)
+-- Greatest remap ever (at least that's what harpoon man thinks)
 vim.keymap.set("x", "<leader>p", '"_dP')
 
 -- Next greatest remap ever asbjornHaland
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
--- Replace the word that you are on with new input
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
+-- Replace the word that you are on with new input, globaly
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Give current file execute permission
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- Show diagnostics line, it was overflowing the screen so i couldn't read it
+vim.keymap.set("n", "<leader>et", vim.diagnostic.open_float)
