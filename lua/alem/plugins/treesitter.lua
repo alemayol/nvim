@@ -21,6 +21,7 @@ return {
         "cpp",
         "sql",
         "markdown",
+        "c_sharp",
       },
       auto_install = true,
       sync_install = false,

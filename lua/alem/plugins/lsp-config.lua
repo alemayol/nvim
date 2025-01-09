@@ -7,7 +7,6 @@ return {
         opts = {
           registries = {
             "github:nvim-java/mason-registry",
-            "github:mason-org/mason-registry",
           },
           ensure_installed = {
             "clang-format",
@@ -25,7 +24,14 @@ return {
     lazy = false,
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "unocss", "gopls", "jdtls", "clangd" },
+        ensure_installed = {
+          "lua_ls",
+          "rust_analyzer",
+          "ts_ls",
+          "unocss",
+          "gopls",
+          "clangd",
+        },
         --automatic_installation = true,
       })
     end,
@@ -34,6 +40,7 @@ return {
     "neovim/nvim-lspconfig",
     lazy = true,
     config = function()
+      local pid = vim.fn.getpid()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local lspconfig = require("lspconfig")
@@ -42,7 +49,7 @@ return {
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
       })
-      lspconfig.tsserver.setup({
+      lspconfig.ts_ls.setup({
         capabilities = capabilities,
       })
       lspconfig.unocss.setup({
@@ -74,6 +81,39 @@ return {
       })
       lspconfig.rust_analyzer.setup({
         capabilities = capabilities,
+      })
+      -- TOML lsp
+      lspconfig.taplo.setup({
+        capabilities = capabilities,
+      })
+
+      lspconfig.omnisharp.setup({
+        capabilities = capabilities,
+        cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/libexec/OmniSharp.dll" },
+        on_attach = function(bufnr)
+          if bufnr == 0 then
+            vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+          end
+        end,
+        enable_import_completion = true,
+        organize_imports_on_format = true,
+        enable_roslyn_analyzers = true,
+        handlers = {
+          ["textDocument/definition"] = function(...)
+            return require("omnisharp_extended").handler(...)
+          end,
+        },
+        keys = {
+
+          "gd",
+          function()
+            require("omnisharp_extended").telescope_lsp_definitions()
+          end,
+          desc = "Goto Definition",
+        },
+        -- root_dir = function()
+        --   return vim.loop.cwd() -- current working directory
+        -- end,
       })
       -- Keybinds
       vim.keymap.set("n", "K", function()

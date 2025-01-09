@@ -1,10 +1,14 @@
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
+  "ellisonleao/gruvbox.nvim",
+  name = "gruvbox",
   lazy = false,
   priority = 1000,
-  opts = {},
+  opts = {
+    terminal_colors = true,
+    contrast = "soft",
+  },
   config = function()
-    vim.cmd.colorscheme("catppuccin-macchiato")
+    vim.o.background = "dark"
+    vim.cmd.colorscheme("gruvbox")
   end,
 }

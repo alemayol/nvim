@@ -1,6 +1,6 @@
 -- Change tab indenting
 vim.opt.expandtab = true
-vim.opt.tabstop = 2
+vim.opt.tabstop = 4
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 
@@ -30,6 +30,9 @@ vim.opt.scrolloff = 8
 -- Fast update time
 vim.opt.updatetime = 50
 
--- Colorcolumnmn... GREAT! (i have no idea what it does... appearantly it puts the vertical bar)
+-- Colorcolumnmn... GREAT! (i have no idea what it does... apparently it puts the vertical bar)
 --vim.opt.colorcolumn = "80"
-vim.opt.colorcolumn = ""
+vim.opt.colorcolumn = "80"
+
+-- Setting system clipboard
+vim.opt.clipboard = "unnamedplus"
