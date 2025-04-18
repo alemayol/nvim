@@ -83,6 +83,14 @@ return {
 				capabilities = capabilities,
 			})
 
+			lspconfig.cssls.setup({
+				capabilities = capabilities,
+			})
+
+			lspconfig.html.setup({
+				capabilities = capabilities,
+			})
+
 			-- Keybinds
 			vim.keymap.set("n", "K", function()
 				vim.lsp.buf.hover()
