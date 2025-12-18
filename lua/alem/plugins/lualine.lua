@@ -2,13 +2,26 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
-    local gruvbox_dark = require("alem.plugins.themes.gruvbox_dark")
-    --local codedark = require("alem.plugins.themes.codedark")
+    local rosepine_moon = require("alem.plugins.luacolors.rosepine_moon")
+  
+    local lualine = require("lualine")
+    local lazy_status = require("lazy.status")
 
-    require("lualine").setup({
-      options = {
-        theme = gruvbox_dark,
-      },
-    })
-  end,
+    lualine.setup {options = {theme = rosepine_moon}, sections = {
+      lualine_x = {
+          {
+            lazy_status.updates,
+            cond = lazy_status.has_updates,
+            color = {fg = "#ff9e64"},
+          },
+          {"encoding"},
+          {"fileformat"},
+          {"filetype"},
+        }
+      }
+    }
+  
+
+    end,
 }
+
