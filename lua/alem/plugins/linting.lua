@@ -13,6 +13,17 @@ return {
 			typescriptangular = { "eslint_d" },
 			python = { "pylint" },
 			vim = { "vint" },
+			golang = { "golancilint" },
+		}
+
+		lint.linters.golangcilint.args = {
+			"run",
+			"--out-format",
+			"json",
+			function()
+				-- Forces golangci-lint to check the directory package of the active file
+				return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")
+			end,
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

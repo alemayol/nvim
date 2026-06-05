@@ -53,6 +53,7 @@ return {
 				"clang-format",
 				"eslint_d",
 				"pylint",
+				"golangci-lint",
 			},
 		})
 
@@ -64,6 +65,7 @@ return {
 			-- VimScript
 			vimls = {},
 			-- Golang server
+			--[[
 			gopls = {
 				cmd = { "gopls" },
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
@@ -77,7 +79,8 @@ return {
 						},
 					},
 				},
-			},
+			},]]
+			--
 			emmet_ls = {
 				-- Emmet language server (html)
 				filetypes = {
