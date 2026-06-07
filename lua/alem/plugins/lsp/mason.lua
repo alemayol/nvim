@@ -58,8 +58,6 @@ return {
 		})
 
 		-- Setting up configurations for all LSPs
-		local lspconfig = require("lspconfig")
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 		local servers_config = {
 			-- VimScript
@@ -102,8 +100,12 @@ return {
 				},
 				settings = {
 					Lua = {
+
 						completion = {
 							callSnippet = "Replace",
+						},
+						runtime = {
+							--version = "LuaJIT",
 						},
 						-- Make the server recognize the vim global variable
 						diagnostics = {
@@ -111,8 +113,9 @@ return {
 						},
 						workspace = {
 							-- Make the server aware of Neovim runtime files
-							library = vim.api.nvim_get_runtime_file("", true),
+							--library = vim.api.nvim_get_runtime_file("", true),
 						},
+						--telemetry = { enabled = false },
 					},
 				},
 			},
@@ -141,17 +144,8 @@ return {
 		-- Enabling autocompletion (assign to every lsp server config)
 		local neo_capabilities = vim.lsp.protocol.make_client_capabilities()
 		local capabilities = require("blink.cmp").get_lsp_capabilities(neo_capabilities)
-		--capabilities = vim.tbl_deep_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
-		--capabilities = vim.tbl_deep_extend("force", capabilities, .get_lsp_capabilities())
 
 		for server, cfg in pairs(servers_config) do
-			--[[capabilities = vim.tbl_deep_extend(
-				"force",
-				capabilities,
-				--cmp_nvim_lsp.default_capabilities(),
-				blinkcapa.get_lsp_capabilities()
-			)]]
-			--
 			cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
 			vim.lsp.config(server, cfg)
 			vim.lsp.enable(server)

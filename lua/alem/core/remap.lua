@@ -1,6 +1,15 @@
 vim.g.mapleader = " " -- leader key
 
-vim.keymap.set("n", "<leader>ep", vim.cmd.Ex) -- go to file explorer
+local oil_installed, oil = pcall(require, "oil")
+
+if oil_installed then
+	print("OIL oil_installed")
+	vim.keymap.set("n", "<leader>ep", ":e %:h<CR>") -- go to file explorer
+else
+	print("OIL NOT oil_installed")
+	vim.keymap.set("n", "<leader>ep", vim.cmd.Ex) -- go to file explorer
+end
+
 vim.keymap.set("n", "<leader>cl", vim.cmd.close) -- close window
 vim.keymap.set("n", "<leader>lz", vim.cmd.Lazy) -- launch lazy
 vim.keymap.set("n", "<S-w>", vim.cmd.w) -- save file
